@@ -1,0 +1,59 @@
+﻿@model List<Rent>
+
+    @if (TempData["success"]!=null)
+{
+    <h3 style="color:green">@TempData["success"]</h3>
+}
+
+<div class="container">
+    <div class="row pt-3 pb-4"
+        <div>
+        <h1>Rent List</h1>
+        </div>
+    </div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+                <th>Id</th>
+            <th>Student</th>
+            <th>Book</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <th></th>
+    </thead>
+
+    <tbody>
+        @foreach(var Rent in  Model)
+            {
+            <tr>
+                    <td>@Rent.Id</td>
+                    <td>@Rent.StudentId</td>
+                    <td>@Rent.Book.Name</td>
+               
+                    <td>
+                        <a asp-controller="Rent" asp-action="AddUpdate" asp-route-id="@Rent.Id" type="button" class="btn btn-info" style="width:300px">Edit </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Rent" asp-action="Delete" asp-route-id="@Rent.Id" type="button" class="btn btn-danger" style="width:300px">Delete </a>
+                    </td>
+                    
+                    
+                   
+            </tr>
+            }
+    </tbody>
+    </table>
+
+    <div 
+        class="row pt-3 pb-2">
+        <div>
+            <a asp-controller="Rent" asp-action="AddUpdate" class="btn btn-lg btn-primary" type="text/asa">
+              + Rent  
+            </a>
+        </div>
+    </div>
+
+</div>
+

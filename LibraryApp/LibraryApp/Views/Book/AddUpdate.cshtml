@@ -1,0 +1,85 @@
+﻿@model Book
+
+
+<form method="post" enctype="multipart/form-data">
+    <input asp-for="PictureURL"hidden/>
+    <div class="row">
+        <div class="col-10">
+            <div class=" border p-3 mt-5">
+                <div class=" row pb-3">
+                    <h2 class="text-primary">Book Details</h2>
+                    </hr>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="Name" class="p-0"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="BookTypeId" class="p-0"></label>
+                    <select asp-for="BookTypeId" asp-items="ViewBag.BookTypeList" class="form-control">
+                    </select>
+                    <span asp-validation-for="BookTypeId" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Author" class="p-0"></label>
+                    <input asp-for="Author" class="form-control" />
+                    <span asp-validation-for="Author" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Description" class="p-0"></label>
+                    <input asp-for="Description" class="form-control" />
+                   
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Price" class="p-0"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="PictureURL" class="p-0"></label>
+                   
+                    <input type="file" name="file"class="form-control" />
+                    <span asp-validation-for="PictureURL" class="text-danger"></span>
+                   
+                    
+                </div>
+                
+              
+
+
+                <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Save</button>
+                <a asp-controller="Book" asp-action="Index" class="btn btn-lg btn-primary" style="width:250px">
+                    Back to Books
+                </a>
+
+            </div>
+        </div>
+        <div class="col-2">
+            @if (Model!=null)
+            {
+                <img src="@Model.PictureURL" width="100%" style="border-radius:14px; border:1px solid #bbb9b9"></img>
+
+              
+            }
+            
+        </div>
+        
+    </div>
+
+
+
+  
+
+</form>
+
+@*  @section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    
+    } 
+} *@

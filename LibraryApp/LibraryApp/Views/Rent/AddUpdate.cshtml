@@ -1,0 +1,55 @@
+﻿@model Rent
+
+
+<form method="post" enctype="multipart/form-data">
+    
+    <div class="row">
+        <div class="col-10">
+            <div class=" border p-3 mt-5">
+                <div class=" row pb-3">
+                    <h2 class="text-primary">Rent Details</h2>
+                    </hr>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="StudentId" class="p-0"></label>
+                    <input asp-for="StudentId" class="form-control" />
+                    <span asp-validation-for="StudentId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="BookId" class="p-0"></label>
+                    <select asp-for="BookId" asp-items="ViewBag.BookList" class="form-control">
+                    </select>
+                    <span asp-validation-for="BookId" class="text-danger"></span>
+                </div>
+
+              
+                <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Save</button>
+                <a asp-controller="Rent" asp-action="Index" class="btn btn-lg btn-primary" style="width:250px">
+                    Back to Rents
+                </a>
+
+            </div>
+        </div>
+        <div class="col-2">
+            @if (Model != null)
+            {
+                <img src="@Model.Book.PictureURL" width="100%" style="border-radius:14px; border:1px solid #bbb9b9"></img>
+
+
+            }
+
+        </div>
+    </div>
+
+
+
+  
+
+</form>
+
+@*  @section Scripts{
+    @{
+        <partial name="_ValidationScriptsPartial"/>
+    
+    } 
+} *@

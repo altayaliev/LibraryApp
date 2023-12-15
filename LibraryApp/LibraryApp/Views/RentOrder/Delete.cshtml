@@ -1,0 +1,31 @@
+﻿@model RentOrder
+
+
+<form method="post">
+    <input asp-for="Id" hidden />
+    <div class=" border p-3 mt-5">
+        <div class=" row pb-3">
+            <h2 class="text-primary">Delete Order</h2>
+            </hr>
+        </div>
+        <div class="mb-3">
+            <label asp-for="StudentNo" class="p-0"></label>
+            <input asp-for="StudentNo"disabled class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="BookId" class="p-0"></label>
+            <select asp-for="BookId" asp-items="ViewBag.BookList" disabled class="form-control">
+            </select>
+
+        </div>
+        
+        
+
+        <button type="submit" class="btn btn-lg btn-primary" style="width:250px">Delete</button>
+        <a asp-controller="RentOrder" asp-action="Index" class="btn btn-lg btn-primary" style="width:250px">
+            Back to Orders
+        </a>
+
+    </div>
+
+</form>

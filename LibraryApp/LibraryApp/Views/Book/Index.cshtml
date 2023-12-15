@@ -1,0 +1,79 @@
+﻿@using LibraryApp.Utility;
+@model List<Book>
+
+    @if (TempData["success"]!=null)
+{
+    <h3 style="color:green">@TempData["success"]</h3>
+}
+
+<div class="container">
+    <div class="row pt-3 pb-4"
+        <div>
+        <h1>Book List</h1>
+        </div>
+    </div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            
+                <th>Id</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Book Category</th>
+                <th>Description</th>
+                <th>Price</th>
+                @if (User.IsInRole(UserRoles.Role_Admin))
+                {
+                    <th></th>
+                    <th></th>
+                }
+
+        </tr>
+            <th></th>
+            
+        </thead>
+       
+    
+    <tbody>
+            
+        @foreach(var Book in  Model)
+            {
+            
+                <tr>
+                <td>@Book.Id</td>
+                <td>@Book.Name</td>
+                <td>@Book.Author</td>
+                 <td>@Book.BookType.Name</td>
+                    <td>@Book.Description</td>
+                    <td>@Book.Price</td>
+                    
+                
+                    @if(User.IsInRole(UserRoles.Role_Admin))
+                   { <td>
+                        <a asp-controller="Book" asp-action="AddUpdate" asp-route-id="@Book.Id" type="button" class="btn btn-info"style="width:200px">Edit </a>
+                    </td>
+                    <td>
+                        <a asp-controller="Book" asp-action="Delete" asp-route-id="@Book.Id" type="button" class="btn btn-danger" style="width:200px">Delete </a>
+                    </td>
+
+                   }
+
+            </tr>
+            }
+    </tbody>
+        
+    </table>
+    @if (User.IsInRole(UserRoles.Role_Admin))
+    {
+        <div 
+        class="row pt-3 pb-2">
+        <div>
+            <a asp-controller="Book" asp-action="AddUpdate" class="btn btn-lg btn-primary" type="text/asa">
+              + Book  
+            </a>
+        </div>
+    </div>}
+
+</div>
+

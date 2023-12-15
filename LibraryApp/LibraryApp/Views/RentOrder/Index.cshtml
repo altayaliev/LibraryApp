@@ -1,0 +1,140 @@
+﻿@using LibraryApp.Utility;
+@model List<RentOrder>
+<form method="post">
+    
+    @if (TempData["success"]!=null)
+{
+    <h3 style="color:green">@TempData["success"]</h3>
+}
+
+<div class="container">
+    <div class="row pt-3 pb-4"
+        <div>
+        <h1>Order List</h1>
+        </div>
+    </div>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+                <th>Id</th>
+            <th>Student No</th>
+            <th>Book</th>
+            <th>State</th>
+            <th>Rent Status</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <th></th>
+    </thead>
+
+    <tbody>
+        @foreach(var RentOrder in  Model)
+            {
+            <tr>
+                    <td>@RentOrder.Id</td>
+                    <td>@RentOrder.StudentNo</td>
+                    <td>@RentOrder.Book.Name</td>
+                        @if (RentOrder.OrderState == true)
+                        {
+                            <td>Confirmed</td>
+                        }
+                        else
+                        {
+                            <td>Not confirmed</td>
+                        }
+                        @if (RentOrder.CreatedRent == true)
+                        {
+                            <td>Rented</td>
+                        }
+                        else
+                        {
+                            <td>Open</td>
+                        }
+                        
+               @if (RentOrder.OrderState==false)
+                        {
+                            <td>
+                                <a asp-controller="RentOrder" asp-action="AddUpdate" asp-route-id="@RentOrder.Id" type="button" class="btn btn-info" style="width:200px">Edit </a>
+                            </td>
+                            <td>
+                                <a asp-controller="RentOrder" asp-action="Delete" asp-route-id="@RentOrder.Id" type="button" class="btn btn-danger" style="width:200px">Delete </a>
+                            </td>
+                            @if (User.IsInRole(UserRoles.Role_Admin))
+                            {
+                                <td>
+                                    <button type="submit" asp-action="Confirm" asp-route-id="@RentOrder.Id" class="btn btn-success" style="width:200px">Confirm</button>
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                            <td></td>
+                            
+                        }
+                        else
+                        {
+                           
+                            @if (User.IsInRole(UserRoles.Role_Admin)&& RentOrder.CreatedRent==false)
+                            {
+                                
+                                
+                                    
+
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    
+                                    <td>
+                                        <input type="hidden" name="studentId" value="@RentOrder.StudentNo" />
+                                        <input type="hidden" name="bookId" value="@RentOrder.BookId" />
+                                        <input type="hidden" name="orderId" value="@RentOrder.Id" />
+                                        <button type="submit" asp-controller="Rent" asp-action="AddFromOrder" class="btn btn-success" style="width:300px">Post Rent </button>
+                                    </td>
+
+                                   
+                                    
+                                    
+                               
+
+
+
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                
+                            }
+                            
+                            
+                        }
+                   
+                    
+                    
+                   
+            </tr>
+            }
+    </tbody>
+    </table>
+        @if (User.IsInRole(UserRoles.Role_Student))
+        {
+            <div class="row pt-3 pb-2">
+                <div>
+                    <a asp-controller="RentOrder" asp-action="AddUpdate" class="btn btn-lg btn-primary" type="text/asa">
+                        + Order
+                    </a>
+                </div>
+            </div>
+        }
+       
+
+</div>
+
+</form>
